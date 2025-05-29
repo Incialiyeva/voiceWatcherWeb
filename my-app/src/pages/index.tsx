@@ -1,13 +1,14 @@
-import { Geist } from "next/font/google";
+import { Inter } from "next/font/google";
 import Image from "next/image";
 
-const geist = Geist({
+const inter = Inter({
   subsets: ["latin"],
+  display: "swap",
 });
 
 export default function Home() {
   return (
-    <div className={`${geist.className} min-h-screen bg-white`}>
+    <div className={`${inter.className} min-h-screen bg-white`}>
       {/* Hero Section */}
       <header className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-white to-orange-50 z-0"></div>
