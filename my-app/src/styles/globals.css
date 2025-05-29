@@ -6,6 +6,9 @@
   --primary: #f97316;
   --primary-dark: #ea580c;
   --primary-light: #ffedd5;
+  --secondary: #fb923c;
+  --accent: #fdba74;
+  --background: #fff7ed;
 }
 
 @layer base {
@@ -14,68 +17,102 @@
   }
   
   body {
-    @apply antialiased;
+    @apply antialiased text-gray-800 bg-[var(--background)];
   }
 
   h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.025em;
+    @apply font-bold tracking-tight;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply relative px-8 py-4 bg-orange-500 text-white rounded-full text-lg font-semibold transition-all hover:bg-orange-600 hover:scale-105;
+    @apply px-8 py-4 bg-[var(--primary)] text-white rounded-2xl text-lg font-bold transition-all 
+    hover:bg-[var(--primary-dark)] hover:shadow-lg hover:scale-105 active:scale-95
+    transform duration-200 ease-in-out;
   }
   
   .btn-secondary {
-    @apply px-8 py-4 border-2 border-orange-500 text-orange-500 rounded-full text-lg font-semibold transition-all hover:bg-orange-50 hover:scale-105;
+    @apply px-8 py-4 border-2 border-[var(--primary)] text-[var(--primary)] rounded-2xl text-lg font-bold 
+    transition-all hover:bg-[var(--primary-light)] hover:scale-105 active:scale-95
+    transform duration-200 ease-in-out;
   }
 
   .card {
-    @apply p-8 rounded-2xl bg-white hover:bg-orange-50 transition-all duration-300 hover:shadow-xl border border-orange-100;
+    @apply p-8 rounded-3xl bg-white hover:bg-[var(--primary-light)] transition-all duration-300 
+    hover:shadow-xl border-2 border-[var(--primary-light)] hover:border-[var(--primary)]
+    hover:scale-105 transform duration-200 ease-in-out;
+  }
+
+  .feature-card {
+    @apply relative overflow-hidden rounded-3xl bg-white p-8 shadow-lg
+    hover:shadow-xl transition-all duration-300 hover:scale-105 transform;
+  }
+
+  .feature-icon {
+    @apply w-20 h-20 flex items-center justify-center rounded-2xl mb-6
+    bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)]
+    text-white transform transition-all duration-300 group-hover:scale-110;
   }
 }
 
-/* Custom Animations */
+/* Animations */
 @keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
 
 @keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
 
-.animate-pulse-slow {
-  animation: pulse 3s ease-in-out infinite;
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.5s ease-out forwards;
 }
 
 /* Custom Gradients */
 .gradient-text {
-  @apply bg-gradient-to-r from-orange-500 to-orange-600 text-transparent bg-clip-text;
+  @apply bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] text-transparent bg-clip-text;
 }
 
 .gradient-bg {
-  @apply bg-gradient-to-br from-orange-500 to-orange-600;
+  @apply bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)];
+}
+
+/* Custom Shapes */
+.shape-blob {
+  @apply absolute rounded-full opacity-20 blur-3xl;
+}
+
+.shape-blob-1 {
+  @apply w-96 h-96 bg-[var(--primary)] -top-48 -left-48;
+}
+
+.shape-blob-2 {
+  @apply w-96 h-96 bg-[var(--secondary)] -bottom-48 -right-48;
 }
 
 /* Custom Shadows */
@@ -85,4 +122,19 @@
 
 .shadow-strong {
   box-shadow: 0 8px 30px -4px rgba(249, 115, 22, 0.2);
+}
+
+/* Progress Bar */
+.progress-bar {
+  @apply h-2 rounded-full bg-gray-200 overflow-hidden;
+}
+
+.progress-bar-fill {
+  @apply h-full bg-[var(--primary)] transition-all duration-300 ease-in-out;
+}
+
+/* Badge */
+.badge {
+  @apply px-4 py-2 rounded-full text-sm font-bold bg-[var(--primary-light)] text-[var(--primary)]
+  transition-all duration-300 hover:bg-[var(--primary)] hover:text-white;
 }
